@@ -3,29 +3,30 @@ import Character from './character.js';
 class Team {
   constructor(persons) {
     this.persons = persons;
-    this[Symbol.iterator] = function () {
-      let current;
-      const last = this.persons.length;
-      const persons = this.persons;
-      let i = 0;
-
-      return {
-        next() {
-            if (i < last) {
-            current = persons[i];
-            i++;
-            return {
-              done: false,
-              value: current,
-            };
-          }
-          return {
-            done: true,
-          };
-        },
-      };
-    };
   }
+
+  [Symbol.iterator] = function () {
+    let current;
+    const last = this.persons.length;
+    const { persons } = this;
+    let i = 0;
+
+    return {
+      next() {
+        if (i < last) {
+          current = persons[i];
+          i++;
+          return {
+            done: false,
+            value: current,
+          };
+        }
+        return {
+          done: true,
+        };
+      },
+    };
+  };
 }
 
 const persons = [];
